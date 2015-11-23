@@ -54,7 +54,7 @@ func (h *Hermes) Publish(topic string, message []byte) error {
 	binary.Write(buf, binary.LittleEndian, byte(0))
 	binary.Write(buf, binary.LittleEndian, uint64(0))
 	key := buf.Bytes()
-	return h.s.Set(key, message)
+	return h.s.Put(key, message)
 }
 
 func (h *Hermes) Subscribe(topic string, clientid string) error {
@@ -67,5 +67,5 @@ func (h *Hermes) Subscribe(topic string, clientid string) error {
 	binary.Write(buf, binary.LittleEndian, byte(0))
 	key := buf.Bytes()
 	value := make([]byte, 10)
-	return h.s.Set(key, value)
+	return h.s.Put(key, value)
 }

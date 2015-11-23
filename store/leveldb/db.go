@@ -71,7 +71,7 @@ func (db *LevelDB) Get(key []byte) ([]byte, error) {
 	}
 	return C.GoBytes(unsafe.Pointer(val), C.int(vlen)), nil
 }
-func (db *LevelDB) Set(key, value []byte) error {
+func (db *LevelDB) Put(key, value []byte) error {
 	var err *C.char
 	C.leveldb_put(db.db, db.writeOpts.Opts, C.CString(string(key)), C.size_t(len(key)),
 		C.CString(string(value)), C.size_t(len(value)), &err)
